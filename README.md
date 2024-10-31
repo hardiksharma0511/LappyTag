@@ -53,3 +53,10 @@ Real-World Relevance: LappyTag can be applied across various fields, from retail
 🔹 License
 This project is licensed under the MIT License.
 
+🔹 Future Improvements
+I am actively working on enhancing LappyTag with:
+
+Improved Model Accuracy: Exploring advanced algorithms to refine prediction precision.
+Additional Features: Incorporating new specifications and expanding the dataset for broader coverage.
+User Experience: Enhancing UI/UX for smoother, more engaging interactions.
+
