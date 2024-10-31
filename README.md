@@ -1,4 +1,5 @@
 LappyTag: Intelligent Laptop Price Prediction
+
 LappyTag is a machine learning-based web application that provides quick, reliable price predictions for laptops based on selected specifications. Built with a responsive and interactive UI using Streamlit, LappyTag is ideal for retailers, consumers, and tech reviewers seeking fast and accurate price insights for various laptop configurations.
 
 Key Features
