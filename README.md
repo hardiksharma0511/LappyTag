@@ -1,4 +1,4 @@
-![Alt Text]("C:\Users\hardi\Downloads\lt4.svg")
+<img src="C:\Users\hardi\Downloads\lt4.svg" alt="LappyTag Logo" style="width:200px;"/>
 LappyTag: Intelligent Laptop Price Prediction
 
 LappyTag is a machine learning-based application that predicts laptop prices based on user-selected specifications. This intuitive web app, built using Streamlit, empowers consumers, retailers, and tech reviewers to assess prices across a wide range of laptop configurations quickly and accurately.
