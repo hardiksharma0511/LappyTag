@@ -3,61 +3,103 @@ import pickle
 import numpy as np
 import pandas as pd
 
-# import the model
+# Load the model and data
 pipe = pickle.load(open('pipe3.pkl', 'rb'))
 df = pickle.load(open('df3.pkl', 'rb'))
 
-st.title("Laptop Predictor")
+# Page configuration
+st.set_page_config(
+    page_title="LappyTag - Laptop Price Predictor",
+    page_icon="💻",
+    layout="wide"
+)
 
-# brand
-company = st.selectbox('Brand', df['Company'].unique())
+# Custom CSS for styling
+st.markdown(
+    """
+    <style>
+    .main {
+        background-color: #f7fbfc;
+    }
+    .title-style {
+        text-align: center;
+        font-family: 'Georgia', serif;
+        color: #154360;
+        font-size: 70px;
+        font-weight: bold;
+        text-shadow: 2px 2px #85c1e9;
+        background-color: #e8f8f5;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .subtitle-style {
+        text-align: center;
+        font-family: 'Trebuchet MS', sans-serif;
+        color: #117864;
+        font-size: 26px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-style: italic;
+    }
+    .footer {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        color: #34495e;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    .footer a {
+        color: #1a5276;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
 
-# type of laptop
-type = st.selectbox('Type', df['TypeName'].unique())
+# Header section
+st.markdown('<h1 class="title-style">LappyTag 💻</h1>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle-style">Your intelligent laptop price prediction system</p>', unsafe_allow_html=True)
 
-# Ram
-ram = st.selectbox('RAM(in GB)', [2, 4, 6, 8, 12, 16, 24, 32, 64])
+# Form layout
+with st.container():
+    st.subheader("Select Laptop Features")
+    col1, col2 = st.columns(2)
 
-# weight
-weight = st.number_input('Weight of the Laptop')
+    with col1:
+        company = st.selectbox('Brand', df['Company'].unique())
+        type = st.selectbox('Type', df['TypeName'].unique())
+        ram = st.selectbox('RAM (in GB)', [2, 4, 6, 8, 12, 16, 24, 32, 64])
+        weight = st.number_input('Weight of the Laptop (kg)', format="%.2f", min_value=0.1)
 
-# Touchscreen
-touchscreen = st.selectbox('Touchscreen', ['No', 'Yes'])
+    with col2:
+        touchscreen = st.radio('Touchscreen', ['No', 'Yes'], horizontal=True)
+        ips = st.radio('IPS Display', ['No', 'Yes'], horizontal=True)
+        screen_size = st.number_input("Screen Size (in inches):", min_value=10.0, format="%.1f")
+        resolution = st.selectbox('Screen Resolution', ['1920x1080', '1366x768', '1600x900', '3840x2160',
+                                                        '3200x1800', '2880x1800', '2560x1600', '2560x1440',
+                                                        '2304x1440'])
 
-# IPS
-ips = st.selectbox('IPS', ['No', 'Yes'])
+    st.subheader("Select Hardware Specifications")
+    col3, col4 = st.columns(2)
 
-# screen size
-screen_size = st.number_input("Enter screen size (in inches):", min_value=0.1)
+    with col3:
+        cpu = st.selectbox('CPU', df['Cpu brand'].unique())
+        hdd = st.selectbox('HDD (in GB)', [0, 128, 256, 512, 1024, 2048])
 
-# resolution
-resolution = st.selectbox('Screen Resolution', ['1920x1080', '1366x768', '1600x900', '3840x2160', '3200x1800',
-                                                '2880x1800', '2560x1600', '2560x1440', '2304x1440'])
+    with col4:
+        ssd = st.selectbox('SSD (in GB)', [0, 8, 128, 256, 512, 1024])
+        gpu_brand = st.selectbox('GPU Brand', df['Gpu brand'].unique())
 
-# Calculate PPI before using it in query
-X_res = int(resolution.split('x')[0])
-Y_res = int(resolution.split('x')[1])
-ppi = ((X_res ** 2) + (Y_res ** 2)) ** 0.5 / screen_size
+    os = st.selectbox('Operating System', df['os'].unique())
 
-# cpu
-cpu = st.selectbox('CPU', df['Cpu brand'].unique())
-
-hdd = st.selectbox('HDD(in GB)', [0, 128, 256, 512, 1024, 2048])
-
-ssd = st.selectbox('SSD(in GB)', [0, 8, 128, 256, 512, 1024])
-
-# GPU Brand only
-gpu_brand = st.selectbox('GPU Brand', df['Gpu brand'].unique())  # Only ask for GPU brand
-
-# OS
-os = st.selectbox('OS', df['os'].unique())
-
-if st.button('Predict Price'):
-    # Convert touchscreen and ips to binary
+# Prediction button
+if st.button('Predict Price', key='predict_button'):
     touchscreen = 1 if touchscreen == 'Yes' else 0
     ips = 1 if ips == 'Yes' else 0
+    X_res, Y_res = map(int, resolution.split('x'))
+    ppi = ((X_res ** 2) + (Y_res ** 2)) ** 0.5 / screen_size
 
-    # Create a dictionary with column names matching the training data
     input_data = {
         'Company': company,
         'TypeName': type,
@@ -69,15 +111,27 @@ if st.button('Predict Price'):
         'Cpu brand': cpu,
         'HDD': hdd,
         'SSD': ssd,
-        'Gpu brand': gpu_brand,  # Only use 'Gpu brand'
+        'Gpu brand': gpu_brand,
         'os': os
     }
 
-    # Convert the dictionary to a DataFrame
     query_df = pd.DataFrame([input_data])
 
-    # Predict price using the pipeline
-    predicted_price = np.exp(pipe.predict(query_df)[0])  # Assuming your model predicts the log price
+    # Predicting the price
+    predicted_price = np.exp(pipe.predict(query_df)[0])  # Assuming log price prediction
 
-    # Display the predicted price
-    st.title("The predicted price of this configuration is " + str(int(predicted_price)))
+    st.success(f"💰 **The predicted price of this configuration is ₹{int(predicted_price):,}**")
+
+# Footer
+st.markdown("---")
+st.markdown(
+    """
+    <div class="footer">
+        <p>Crafted with 💙 by Hardik Sharma</p>
+        <p>
+            <a href="https://github.com/hardiksharma0511" target="_blank">GitHub</a> | 
+            <a href="https://www.linkedin.com/in/hardiksharma05" target="_blank">LinkedIn</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True
+)
