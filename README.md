@@ -49,7 +49,7 @@ LappyTag leverages a machine learning pipeline trained on a dataset of laptop sp
 * Feature Engineering: Categorical encoding, binary encoding for touchscreen/IPS, and display PPI calculation.
 * Model: Regression model fine-tuned to deliver accurate predictions.
 
-## 🔹 Project Goal
+## 🔹 Project Goals
 * Accurate Price Prediction: Reliable price estimates for various laptop configurations.
 * Enhanced User Experience: Simple, intuitive UI for smooth interaction.
 * Real-World Application: Targeted for e-commerce, retail, and tech journalism use cases.
