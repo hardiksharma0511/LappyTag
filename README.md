@@ -18,7 +18,7 @@ Hardware Specifications: Input RAM, CPU, storage (HDD/SSD), and GPU to specify l
 Display Options: Customize display features with options for touchscreen, IPS technology, screen size, and resolution (auto-calculated PPI for accurate display assessment).
 Instant Price Prediction: Powered by a trained machine learning model, LappyTag offers quick and precise price estimates with just one click.
 User-Friendly Interface: Built with Streamlit, the application is designed for seamless user interaction, providing immediate results in an accessible format.
-.
+
 ## 🔹 Technologies Used
 * Python – Core programming language.
 * Pandas & NumPy – Data processing and numerical computations.
