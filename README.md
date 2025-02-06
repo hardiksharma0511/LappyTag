@@ -9,7 +9,7 @@ LappyTag is a machine learning-powered web application that helps users predict 
 🚀 Instant Price Predictions
 
 📊 Machine Learning Powered
-
+.
 💻 Comprehensive Laptop Configurations
 
 ## 🔹 Key Features
