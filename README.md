@@ -33,13 +33,8 @@ Follow these steps to set up LappyTag locally:
 git clone https://github.com/hardiksharma0511/LappyTag.git
 cd LappyTag
 
-### 2. Install dependencies:
-pip install -r requirements.txt
-
-### 3. Run the application:
+### 2. Run the application:
 streamlit run app.py
-
-After starting, the application will open in your browser, usually at http://localhost:8501.
 
 
 ## 🔹 How It Works
