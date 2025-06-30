@@ -2,10 +2,19 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
+import os
 
 # Load the model and data
-pipe = pickle.load(open('pipe3.pkl', 'rb'))
-df = pickle.load(open('df3.pkl', 'rb'))
+try:
+    if not os.path.exists('pipe3.pkl'):
+        raise FileNotFoundError('pipe3.pkl not found in the app directory.')
+    if not os.path.exists('df3.pkl'):
+        raise FileNotFoundError('df3.pkl not found in the app directory.')
+    pipe = pickle.load(open('pipe3.pkl', 'rb'))
+    df = pickle.load(open('df3.pkl', 'rb'))
+except Exception as e:
+    st.error(f"Error loading model or data: {e}\n\nIf you see a ModuleNotFoundError, make sure all required libraries and custom classes used in the model are installed and available.")
+    st.stop()
 
 # Page configuration
 st.set_page_config(
