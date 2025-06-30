@@ -12,6 +12,9 @@ LappyTag is a machine learning-powered web application that helps users predict 
 
 💻 Comprehensive Laptop Configurations
 
+## 🚀 Live Demo  https://lappytag.streamlit.app/
+
+
 ## 🔹 Key Features
 Brand & Model Selection: Choose from popular laptop brands and models, including gaming, business, and ultrabook types.
 Hardware Specifications: Input RAM, CPU, storage (HDD/SSD), and GPU to specify laptop configurations.
