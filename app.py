@@ -27,38 +27,77 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    .stApp {
+        background: url('bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
     .main {
-        background-color: #f7fbfc;
+        background: transparent !important;
     }
     .title-style {
         text-align: center;
         font-family: 'Georgia', serif;
-        color: #154360;
+        color: #fff;
         font-size: 70px;
         font-weight: bold;
-        text-shadow: 2px 2px #85c1e9;
-        background-color: #e8f8f5;
-        padding: 20px;
-        border-radius: 10px;
+        text-shadow: 2px 2px #222;
+        background: rgba(0,0,0,0.85);
+        padding: 30px 20px 20px 20px;
+        border-radius: 18px;
+        margin-bottom: 0px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.25);
     }
     .subtitle-style {
         text-align: center;
         font-family: 'Trebuchet MS', sans-serif;
-        color: #117864;
+        color: #fff;
         font-size: 26px;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 30px;
         font-style: italic;
+        background: rgba(0,0,0,0.55);
+        padding: 10px 0 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .form-container {
+        background: rgba(255,255,255,0.18);
+        border-radius: 18px;
+        padding: 32px 24px 24px 24px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    }
+    .stButton>button {
+        background: #111;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 0.75em 2em;
+        font-size: 1.2em;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        transition: background 0.2s;
+    }
+    .stButton>button:hover {
+        background: #333;
+        color: #ffe082;
+    }
+    .stSelectbox>div>div>div>div, .stNumberInput>div>div>input, .stRadio>div>div {
+        background: transparent !important;
+        border-radius: 8px !important;
     }
     .footer {
         font-family: 'Arial', sans-serif;
         text-align: center;
-        color: #34495e;
+        color: #fff;
         font-size: 16px;
         margin-top: 20px;
+        background: rgba(0,0,0,0.7);
+        border-radius: 10px;
+        padding: 10px 0 10px 0;
     }
     .footer a {
-        color: #1a5276;
+        color: #ffe082;
         text-decoration: none;
         font-weight: bold;
     }
@@ -72,6 +111,7 @@ st.markdown('<p class="subtitle-style">Your intelligent laptop price prediction 
 
 # Form layout
 with st.container():
+    st.markdown('<div class="form-container">', unsafe_allow_html=True)
     st.subheader("Select Laptop Features")
     col1, col2 = st.columns(2)
 
@@ -88,7 +128,9 @@ with st.container():
         resolution = st.selectbox('Screen Resolution', ['1920x1080', '1366x768', '1600x900', '3840x2160',
                                                         '3200x1800', '2880x1800', '2560x1600', '2560x1440',
                                                         '2304x1440'])
+    st.markdown('</div>', unsafe_allow_html=True)
 
+    st.markdown('<div class="form-container">', unsafe_allow_html=True)
     st.subheader("Select Hardware Specifications")
     col3, col4 = st.columns(2)
 
@@ -101,6 +143,7 @@ with st.container():
         gpu_brand = st.selectbox('GPU Brand', df['Gpu brand'].unique())
 
     os = st.selectbox('Operating System', df['os'].unique())
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Prediction button
 if st.button('Predict Price', key='predict_button'):
@@ -136,7 +179,7 @@ st.markdown("---")
 st.markdown(
     """
     <div class="footer">
-        <p>Crafted with 💙 by Hardik Sharma</p>
+        <p>Crafted by Hardik Sharma</p>
         <p>
             <a href="https://github.com/hardiksharma0511" target="_blank">GitHub</a> | 
             <a href="https://www.linkedin.com/in/hardiksharma05" target="_blank">LinkedIn</a>
