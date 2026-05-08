@@ -1,6 +1,4 @@
 
-
-
 <p align="center">
     <img src="lt4.svg" alt="Laptop Image" width="300px" />
 </p>
