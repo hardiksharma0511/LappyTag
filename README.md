@@ -10,7 +10,6 @@ LappyTag is a machine learning-powered web application that helps users predict 
  
 📊 Machine Learning Powered
 
-
 💻 Comprehensive Laptop Configurations
 
 ## 🚀 Live Demo  https://lappytag.streamlit.app/
